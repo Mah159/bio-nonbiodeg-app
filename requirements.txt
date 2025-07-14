@@ -1,4 +1,6 @@
-streamlit==1.34.0
+fastapi
+uvicorn
 tensorflow==2.12.0
-Pillow
 numpy
+Pillow
+python-multipart
