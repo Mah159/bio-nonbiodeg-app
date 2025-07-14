@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Waste Classifier</title>
+</head>
+<body>
+  <h2>Upload Waste Image</h2>
+  <input type="file" id="upload">
+  <button onclick="predict()">Classify</button>
+  <div id="output"></div>
+
+  <script>
+    async function predict() {
+      const file = document.getElementById('upload').files[0];
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const res = await fetch("https://your-render-url.onrender.com/predict/", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await res.json();
+      document.getElementById("output").innerHTML =
+        `<h3>${data.class} (${(data.confidence * 100).toFixed(2)}%)</h3>
+         <p>${data.tip}</p>`;
+    }
+  </script>
+</body>
+</html>
